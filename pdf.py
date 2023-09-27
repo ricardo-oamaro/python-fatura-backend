@@ -60,9 +60,12 @@ for p in palavras_chave:
 
 adiciona_a_lista(texto)
 
-padrao = r'\d{2}/\w{3}'
+padrao = r'(\d{2}/\w{3})(.*?)\((.*?)\)'
 
 for l in lista:
-    if m := re.match(padrao, l): lista2.append(m.group())
+     lista_separada = l.split('\xa0')
+     sublista = [el.replace(' ', '') for el in lista_separada if el.strip()]
+     lista2.append(sublista)
 
-print(lista2)
+for l in lista2:
+    print(l)
