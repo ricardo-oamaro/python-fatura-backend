@@ -12,7 +12,7 @@ palavras_chave = ["MAR", "JUL", "AGO", "SET"]
 meses = ["03", "07", "08", "09"]
 
 lista = []
-lista2 =[]
+lista2 = []
 
 
 def remover_linhas(texto, inicio, fim):
@@ -41,10 +41,9 @@ def separar_texto(texto):
     match = re.match(padrao, linhas)
     if match:
         partes = match.groups()
+        return partes
     else:
-        print("Padrão não encontrado na linha.")
-    novo_texto = '\n'.join(linhas)
-    return novo_texto
+        return "erro"
 
 
 def adiciona_a_lista(texto):
@@ -59,5 +58,11 @@ texto = remover_linhas(texto, 1, 13)
 for p in palavras_chave:
     texto = mover_linha_para_cima(texto, p)
 
-test_lista = adiciona_a_lista(texto)
-print(lista)
+adiciona_a_lista(texto)
+
+padrao = r'\d{2}/\w{3}'
+
+for l in lista:
+    if m := re.match(padrao, l): lista2.append(m.group())
+
+print(lista2)
