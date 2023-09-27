@@ -2,7 +2,7 @@ import gspread
 from pdf import *
 import re
 
-texto = lista2
+texto = lista_tratada
 
 #connect to the service account
 gc = gspread.service_account(filename="cred.json")

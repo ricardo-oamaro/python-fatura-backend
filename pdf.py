@@ -8,11 +8,17 @@ page = pdf.pages[0]
 text = page.extract_text()
 texto = text
 
+# TODO multiple pages
+#for i in range(len(pdf.pages)):
+ #   page = pdf.pages[i]
+  #  texto += page.extract_text()
+
 palavras_chave = ["MAR", "JUL", "AGO", "SET"]
 meses = ["03", "07", "08", "09"]
+padrao = r'(\d{2}/\w{3})(.*?)\((.*?)\)'
 
 lista = []
-lista2 = []
+lista_tratada = []
 
 
 def remover_linhas(texto, inicio, fim):
@@ -60,12 +66,18 @@ for p in palavras_chave:
 
 adiciona_a_lista(texto)
 
-padrao = r'(\d{2}/\w{3})(.*?)\((.*?)\)'
-
 for l in lista:
      lista_separada = l.split('\xa0')
      sublista = [el.replace(' ', '') for el in lista_separada if el.strip()]
-     lista2.append(sublista)
+     lista_tratada.append(sublista)
 
-for l in lista2:
-    print(l)
+data = ''
+for i, lista in enumerate(lista_tratada):
+    if len(lista) < 3:
+        lista.insert(0, data)
+        i+=1
+    else:
+        data = lista_tratada[i][0]
+        i+=1
+
+print(lista_tratada)
