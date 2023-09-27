@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cellular-hold-314114",
+  "private_key_id": "1497f7c83639fbc276c28bbc2ba87fb3074e961d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIvO89R+BYx9KX\n2I0aGA05buyOPtibplFfudPViHj5qMWc3rGUR54vGdRjy8XMCf06CtLEhpmIHWHs\n8OqXRT2RLqR8pgbUTn0INo83l8Bbmc9PAilhxmGTcLFz8iGJOCksMEQVy/b1qdVG\nOk8jZw9scBdt25yrErgk0izNImBxnMEphhQa5h2gTWeKL8K+TR/upo7OIeKVwup2\n1W1ppWBzubMNRZOQeutoZ2SM2FGIicuFzUNiYuiPc3U5QF8hXSKmQWDLY33j2A+p\nHsd9mwGfGlcO0YdJyL2YiuznkvrugTB+ZoyNsXsB8frHK2gjhjHhGb2e8pCdrRmu\nqMBgBle5AgMBAAECggEAE5Za/lbsgWE7L4GsEA0jgjSMjNs9Sd/WXiG89b+3tT3G\njZZty78axHQP5U6BjhW18cNTWmWbZtyeHO+LpofVOHzNhFOzhCUl/maLfkRWmuGU\n6NvYQ6AGzqsfB6YrZ081dkg95oYU4pcINm5zYSwZ5U4BPUEiBg/hK8ed40Tc1g0G\nL4BcCMEFoWn0QHUgWMlBCqpi9DZZ4lXPZPTOG4eZTwCvwPgKcrv6dRQfvHMdsz9X\n7exCQX4SkIbPRHJ0dJoGYndxe3hn3I/JQOQAo8jumMAoMtL9Og9wU0okB+8j5AlA\ne0QgVIA1bPk5wnOWqLPd0VDjkA/LZr5V5CF5Ihi/sQKBgQD0Sp5nbSJGpH3aA4+i\nT0Ev+QkC2MBBea7Tk8/fUahUpkcXCsJIqek1vfKpZ8IkK90E1DjmdHrlRVlWqT/4\neEwC/TW1lPCbgGxcWIbCql9oBEcT1cSKU25K4vi5PuDPsMUAdhYUmwS21029mGFB\n8kL+WJJr+QaP1jFn7FiWpqjUqQKBgQDSW+2kk+bsKHz3DxWrLGJbwkwU6guKolz9\nFJp6DJxwsbsOoqjJMh9j8rh5AktwWJrazyK8ICDduGznZy9bhjRq4DtN0kSdLyr+\n+7xSWxBPYg9Ehk9iXx2Ww5Vr6oB3UzTjebdAg3MCCfB3ON+xKDWQh84D8WDF5UM2\nuMvC60FEkQKBgQCBqoG94B2LZZAvgihhPLQbJJJ14lrZ5h63ywNRQ+SXWdLuFhXd\nv+I7VmFRLfPMg0PDZmn1WOpKe67Z4uhDmIawJ3q0sSOtRlM+CPcuqIQPkAWyL4ss\n6O/n6+WdXhSx6OAISKWbtlSgQFPRSOqGuHJ60sSVbw7elhCPWtIC1N9UUQKBgBJT\n7BqgwEfnJywnZk3pqhAwl4xi7+p+RvfN6b+khaTT92ZJCcet1EpTBXuVlZkOPz+9\nOFuHuRVYUjS/KsMgqER/kOsw3MWNLIPWzwul33/rHUVtJlF91AgktkoWvmanGz6O\nhkbarRSKZSceD29R/4i+LFbvmuzjEr4bz7UF5kPhAoGAJsMn8K16Mp9THuucAAE0\no2+aaCtJHUJ5RScwp2ucQtM6e4N2mCGAomJKpzlAgUNJGrvqMOP0wu8u7oZdRzYY\nXMfkoWWACReaxm5tV19jAji1WEPP+QEVW7MpPNOARF7Qs1YN/1JB6YFIFp41f9pI\ny3aFGwkOEi+dLcz3pTf5pcY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "python-cred@cellular-hold-314114.iam.gserviceaccount.com",
+  "client_id": "117604583191230631565",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/python-cred%40cellular-hold-314114.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
