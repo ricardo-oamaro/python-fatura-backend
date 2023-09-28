@@ -5,13 +5,14 @@ from prettytable import PrettyTable
 pdf = PdfReader('Bradesco.pdf')
 page = pdf.pages[0]
 
-text = page.extract_text()
-texto = text
+# text = page.extract_text()
+texto = ''
+#data = ''
 
 # TODO multiple pages
-#for i in range(len(pdf.pages)):
- #   page = pdf.pages[i]
-  #  texto += page.extract_text()
+for i in range(len(pdf.pages)):
+  page = pdf.pages[i]
+  texto += page.extract_text()
 
 palavras_chave = ["MAR", "JUL", "AGO", "SET"]
 meses = ["03", "07", "08", "09"]
@@ -21,11 +22,9 @@ lista = []
 lista_tratada = []
 
 
-def remover_linhas(texto, inicio, fim):
-    linhas = texto.split('\n')
-    linhas = linhas[:inicio - 1] + linhas[fim:]
-    novo_texto = '\n'.join(linhas)
-    return novo_texto
+def remover_linhas(texto):
+    linhas = [item for item in texto if item[0] != '' and len(item) != 2]
+    return linhas
 
 
 def mover_linha_para_cima(texto, palavra_chave):
@@ -58,26 +57,31 @@ def adiciona_a_lista(texto):
     while i < len(linhas):
         lista.append(linhas[i].strip())
         i += 1
+def trata_lista(lista):
+    for l in lista:
+        lista_separada = l.split('\xa0')
+        sublista = [el.replace(' ', '') for el in lista_separada if el.strip()]
+        lista_tratada.append(sublista)
+
+def adiciona_data(lista_tratada):
+    data = ''
+    for i, lista in enumerate(lista_tratada):
+        if len(lista) < 3:
+            lista.insert(0, data)
+            i += 1
+        else:
+            data = lista_tratada[i][0]
+            i += 1
 
 
-texto = remover_linhas(texto, 1, 13)
 for p in palavras_chave:
     texto = mover_linha_para_cima(texto, p)
 
 adiciona_a_lista(texto)
+trata_lista(lista)
+adiciona_data(lista_tratada)
 
-for l in lista:
-     lista_separada = l.split('\xa0')
-     sublista = [el.replace(' ', '') for el in lista_separada if el.strip()]
-     lista_tratada.append(sublista)
+lista_tratada = remover_linhas(lista_tratada)
 
-data = ''
-for i, lista in enumerate(lista_tratada):
-    if len(lista) < 3:
-        lista.insert(0, data)
-        i+=1
-    else:
-        data = lista_tratada[i][0]
-        i+=1
-
-print(lista_tratada)
+for l in lista_tratada:
+    print(l)
