@@ -1,8 +1,7 @@
 from PyPDF2 import PdfReader
 import re
-from prettytable import PrettyTable
 
-pdf = PdfReader('Bradesco.pdf')
+pdf = PdfReader('/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf')
 page = pdf.pages[0]
 
 # text = page.extract_text()
@@ -20,10 +19,12 @@ padrao = r'(\d{2}/\w{3})(.*?)\((.*?)\)'
 
 lista = []
 lista_tratada = []
-
+itens_a_remover = ["Totaldafatura", "Saldoanterior", "SALDOANTERIOR",
+                   "Pagamentos/Créditos", "Despesaslocais", "Despesasnoexterior", "Pagamentomínimo", "PAGBOLETOBANCARIO"]
 
 def remover_linhas(texto):
     linhas = [item for item in texto if item[0] != '' and len(item) != 2]
+    linhas = [item for item in linhas if not any(termo in item[1] for termo in itens_a_remover)]
     return linhas
 
 
