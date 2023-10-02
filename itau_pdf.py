@@ -1,11 +1,22 @@
 import re
 import pdfplumber
 
+data = ''
+string_alvo = 'Banco Itaú'
+fatura_itau = False
+fatura_bradesco = False
+palavras_chave = ["MAR", "JUL", "AGO", "SET"]
 
-with pdfplumber.open('/Users/ramaro/Desktop/pessoal_fatura/itaucard.pdf') as pdf:
-    page = pdf.pages[1]
-    data = page.extract_text()
-    print(data)
+with pdfplumber.open('/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf') as pdf:
+    for i in range(len(pdf.pages)):
+        page = pdf.pages[i]
+        data += page.extract_text()
+        if data and string_alvo in data:
+            fatura_itau = True
+        else:
+            fatura_bradesco = True
+    print(fatura_itau)
+    print(fatura_bradesco)
 
 # initial_data_pattern = re.compile(r'\d{2}/\d{2}(.*?\d+,\d{2})$') //possivel remoção
 handled_data_pattern = re.compile(r'(\d{2}/\d{2})\s+(.*?)\s+(\d+,\d{2})')
