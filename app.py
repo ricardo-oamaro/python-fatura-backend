@@ -1,5 +1,5 @@
 import gspread
-from pdf import *
+from bradesco_pdf import *
 import itau_pdf
 
 texto = lista_tratada

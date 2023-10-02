@@ -1,17 +1,23 @@
-from PyPDF2 import PdfReader
 import re
 
-pdf = PdfReader('/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf')
+from PyPDF2 import PdfReader
+
+import itau_pdf
+
+pdf = PdfReader(itau_pdf.pdf_file)
 page = pdf.pages[0]
 
 # text = page.extract_text()
 texto = ''
-#data = ''
+# data = ''
+
+handled_data_pattern = re.compile(r'(\d{2}/\d{2})\s+(.*?)\s+(\d+,\d{2})')
+
 
 # TODO multiple pages
 for i in range(len(pdf.pages)):
-  page = pdf.pages[i]
-  texto += page.extract_text()
+    page = pdf.pages[i]
+    texto += page.extract_text()
 
 palavras_chave = ["MAR", "JUL", "AGO", "SET"]
 meses = ["03", "07", "08", "09"]
@@ -20,7 +26,22 @@ padrao = r'(\d{2}/\w{3})(.*?)\((.*?)\)'
 lista = []
 lista_tratada = []
 itens_a_remover = ["Totaldafatura", "Saldoanterior", "SALDOANTERIOR",
-                   "Pagamentos/Créditos", "Despesaslocais", "Despesasnoexterior", "Pagamentomínimo", "PAGBOLETOBANCARIO"]
+                   "Pagamentos/Créditos", "Despesaslocais", "Despesasnoexterior", "Pagamentomínimo",
+                   "PAGBOLETOBANCARIO"]
+result_list = []
+
+
+def ajustar_texto(data):
+
+    for line in data.split('\n'):
+        if handled_data_pattern.match(line):
+            pattern = re.search(r'\d,\d{2}', line)
+            if pattern:
+                final_position = pattern.end()
+                result = line[:final_position]
+                result_list.append(result)
+            else:
+                print('Pattern no matches')
 
 def remover_linhas(texto):
     linhas = [item for item in texto if item[0] != '' and len(item) != 2]
@@ -58,11 +79,14 @@ def adiciona_a_lista(texto):
     while i < len(linhas):
         lista.append(linhas[i].strip())
         i += 1
+
+
 def trata_lista(lista):
     for l in lista:
         lista_separada = l.split('\xa0')
         sublista = [el.replace(' ', '') for el in lista_separada if el.strip()]
         lista_tratada.append(sublista)
+
 
 def adiciona_data(lista_tratada):
     data = ''
@@ -78,11 +102,14 @@ def adiciona_data(lista_tratada):
 for p in palavras_chave:
     texto = mover_linha_para_cima(texto, p)
 
-adiciona_a_lista(texto)
-trata_lista(lista)
-adiciona_data(lista_tratada)
+ajustar_texto(texto)
+print(texto)
 
-lista_tratada = remover_linhas(lista_tratada)
-
-for l in lista_tratada:
-    print(l)
+# adiciona_a_lista(texto)
+# trata_lista(lista)
+# adiciona_data(lista_tratada)
+#
+# lista_tratada = remover_linhas(lista_tratada)
+#
+# for l in lista_tratada:
+#     print(l)
