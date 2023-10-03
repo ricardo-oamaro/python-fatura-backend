@@ -1,11 +1,16 @@
 import re
 import subprocess
+import time
+from app import *
+from bradesco_pdf import *
+
 import bradesco_pdf
 
 import pdfplumber
 
-pdf_file = '/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf'
+pdf_file = '/Users/ramaro/Desktop/pessoal_fatura/itaucard.pdf'
 string_alvo = 'Banco Itaú'
+string_alvo2 = 'BancoItaúS.A.'
 fatura_itau = False
 fatura_bradesco = False
 texto = ''
@@ -17,10 +22,12 @@ with pdfplumber.open(pdf_file) as pdf:
     for i in range(len(pdf.pages)):
         page = pdf.pages[i]
         data += page.extract_text()
-    if data and string_alvo in data:
+    if data and string_alvo or data and string_alvo2 in data:
         fatura_itau = True
     else:
         fatura_bradesco = True
+
+print(fatura_itau)
 
 # initial_data_pattern = re.compile(r'\d{2}/\d{2}(.*?\d+,\d{2})$') //possivel remoção
 handled_data_pattern = re.compile(r'(\d{2}/\d{2})\s+(.*?)\s+(\d+,\d{2})')
@@ -54,22 +61,7 @@ if fatura_itau:
 
 if fatura_bradesco:
     subprocess.run(['python3', 'bradesco_pdf.py', pdf_file])
-    # data = ''
-    # pdf = PdfReader(pdf_file)
-    #
-    # for i in range(len(pdf.pages)):
-    #     page = pdf.pages[i]
-    #     data += page.extract_text()
-    # # print(data)
-    #
-    # for p in palavras_chave:
-    #     texto = bradesco_pdf.mover_linha_para_cima(data, p)
-    #
-    # bradesco_pdf.adiciona_a_lista(texto)
-    # print(texto)
-    # bradesco_pdf.trata_lista(bradesco_pdf.lista)
-    # bradesco_pdf.adiciona_data(bradesco_pdf.lista_tratada)
-    # # bradesco_pdf.lista_tratada = bradesco_pdf.remover_linhas(bradesco_pdf.lista_tratada)
-    #
-    # for l in bradesco_pdf.lista_tratada:
-    #     print(l)
+
+
+time.sleep(5)
+subprocess.run(["python3", "app.py"])
