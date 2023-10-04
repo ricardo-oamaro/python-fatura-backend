@@ -1,35 +1,33 @@
 import re
 import subprocess
 import time
-from app import *
-from bradesco_pdf import *
-
-import bradesco_pdf
+import app
 
 import pdfplumber
 
-pdf_file = '/Users/ramaro/Desktop/pessoal_fatura/itaucard.pdf'
-string_alvo = 'Banco Itaú'
-string_alvo2 = 'BancoItaúS.A.'
+pdf_file = '/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf'
+string_alvo = 'Itaú'
 fatura_itau = False
 fatura_bradesco = False
-texto = ''
-lista = []
-lista2 = []
+data = ''
+
 
 with pdfplumber.open(pdf_file) as pdf:
-    data = ''
+
     for i in range(len(pdf.pages)):
         page = pdf.pages[i]
         data += page.extract_text()
-    if data and string_alvo or data and string_alvo2 in data:
+    if data and string_alvo in data:
         fatura_itau = True
     else:
         fatura_bradesco = True
 
-print(fatura_itau)
 
+
+print(fatura_itau)
+print(fatura_bradesco)
 # initial_data_pattern = re.compile(r'\d{2}/\d{2}(.*?\d+,\d{2})$') //possivel remoção
+
 handled_data_pattern = re.compile(r'(\d{2}/\d{2})\s+(.*?)\s+(\d+,\d{2})')
 result_list = []
 result_list2 = []
@@ -55,13 +53,12 @@ if fatura_itau:
             value = result.group(3)
 
             result_list2.append([date, desc, value])
+print('passei aqui')
 
-    for line in result_list2:
-        print(line)
 
 if fatura_bradesco:
     subprocess.run(['python3', 'bradesco_pdf.py', pdf_file])
 
 
-time.sleep(5)
-subprocess.run(["python3", "app.py"])
+# time.sleep(5)
+# subprocess.run(["python3", "app.py"])

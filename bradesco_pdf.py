@@ -1,21 +1,23 @@
 import re
 import subprocess
+import sys
 import time
 
 from PyPDF2 import PdfReader
 
 import itau_pdf
 
-pdf = PdfReader(itau_pdf.pdf_file)
-page = pdf.pages[0]
+pdf_brd = PdfReader(itau_pdf.pdf_file)
+page = pdf_brd.pages[0]
 
-text = ''
+data = ''
 
 text_adjustment_pattern = r'(?<=,\d{2})'
 
-for i in range(len(pdf.pages)):
-    page = pdf.pages[i]
-    text += page.extract_text()
+if itau_pdf.fatura_bradesco:
+    for i in range(len(pdf_brd.pages)):
+        page = pdf_brd.pages[i]
+        data += page.extract_text()
 
 keywords = ["MAR", "JUL", "AGO", "SET"]
 months = ["03", "07", "08", "09"]
@@ -82,9 +84,9 @@ def insert_date(handled_list):
 
 # print(texto)
 for p in keywords:
-    text = lines_up(text, p)
+    data = lines_up(data, p)
 
-result_list = handle_data(text)
+result_list = handle_data(data)
 # print(result_list)
 add_to_list(result_list)
 # print(lista)
