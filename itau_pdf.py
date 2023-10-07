@@ -5,7 +5,7 @@ import app
 
 import pdfplumber
 
-pdf_file = '/Users/ramaro/Desktop/pessoal_fatura/Bradesco_out.pdf'
+pdf_file = './arquivo.pdf'
 string_alvo = 'Itaú'
 fatura_itau = False
 fatura_bradesco = False
