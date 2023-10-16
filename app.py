@@ -6,14 +6,14 @@ from sms import result_list, sms_receiver
 import itau_pdf
 
 sh_updated = False
-#connect to the service account
+# connect to the service account
 gc = gspread.service_account(filename="cred.json")
 
 sh = gc.open("Teste").sheet1
 
 linhas = []
 
-if sms_receiver:
+if sms_receiver == 'True':
     linhas = result_list
 elif itau_pdf.fatura_itau:
     linhas = itau_pdf.result_list2
@@ -21,7 +21,6 @@ else:
     linhas = handled_list
     print('executado essa linha')
 
+sh.clear()
 sh.update('A1:C', linhas)
 sys.exit(0)
-
-
