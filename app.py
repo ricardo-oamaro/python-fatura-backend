@@ -13,7 +13,8 @@ spreadsheet = gc.open("bradesco")
 
 sheet = spreadsheet.worksheet('meses')
 
-get_month = sheet.cell(1, 1).value
+get_month = sheet.cell(5, 1).value.capitalize()
+print(get_month)
 
 month_sheet = spreadsheet.worksheet(get_month)
 
@@ -37,4 +38,5 @@ else:
 month_sheet.update_cell(next_line, 1, linhas[0][0])
 month_sheet.update_cell(next_line, 2, linhas[0][1])
 month_sheet.update_cell(next_line, 3, linhas[0][2])
+# month_sheet.update('A1:C', linhas)
 sys.exit(0)
