@@ -5,6 +5,7 @@ import server
 
 sms_file = './sms.txt'
 sms_receiver = sys.argv[1]
+owner_sheet = sys.argv[2]
 data = ''
 result_list = []
 handled_data_pattern = r'(\d{2}/\d{2})(\d+,\d{2})\s(.*?)'

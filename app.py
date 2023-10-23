@@ -3,17 +3,21 @@ import sys
 import gspread
 
 from bradesco_pdf import handled_list
-from sms import result_list, sms_receiver
+from sms import result_list, sms_receiver, owner_sheet
 import itau_pdf
 
 sh_updated = False
 # connect to the service account
 gc = gspread.service_account(filename="cred.json")
+spreadsheet = ''
+sheet = ''
 
-spreadsheet = gc.open("bradesco")
-
-##### logica sms
-sheet = spreadsheet.worksheet('meses')
+if owner_sheet == 'Ricardo':
+    spreadsheet = gc.open("bradesco")
+    sheet = spreadsheet.worksheet('meses')
+else:
+    spreadsheet = gc.open("itau")
+    sheet = spreadsheet.worksheet('meses')
 
 get_month = sheet.cell(5, 1).value.capitalize()
 
