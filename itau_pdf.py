@@ -2,26 +2,31 @@ import re
 import subprocess
 import sys
 import time
+from os.path import exists
+
 import app
 
 import pdfplumber
 
-pdf_file = './arquivo.pdf'
+pdf_file = ''
 string_alvo = 'Itaú'
 fatura_itau = False
 fatura_bradesco = False
 data = ''
+owner_sheet = sys.argv[2]
 
 
-with pdfplumber.open(pdf_file) as pdf:
+if exists('arquivo.pdf'):
+    pdf_file = './arquivo.pdf'
+    with pdfplumber.open(pdf_file) as pdf:
 
-    for i in range(len(pdf.pages)):
-        page = pdf.pages[i]
-        data += page.extract_text()
-    if data and string_alvo in data:
-        fatura_itau = True
-    else:
-        fatura_bradesco = True
+        for i in range(len(pdf.pages)):
+            page = pdf.pages[i]
+            data += page.extract_text()
+        if data and string_alvo in data:
+            fatura_itau = True
+        else:
+            fatura_bradesco = True
 
 
 

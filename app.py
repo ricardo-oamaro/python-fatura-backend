@@ -12,7 +12,7 @@ gc = gspread.service_account(filename="cred.json")
 spreadsheet = ''
 sheet = ''
 
-if owner_sheet == 'Ricardo':
+if owner_sheet == 'Ricardo' or itau_pdf.owner_sheet == 'Ricardo':
     spreadsheet = gc.open("bradesco")
     sheet = spreadsheet.worksheet('meses')
 else:

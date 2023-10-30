@@ -23,10 +23,12 @@ padrao_valor = r'\d+,\d{2}'
 valor = re.search(padrao_valor, data).group()
 
 # Encontrar o texto restante
-padrao_bradesco = r'VALOR DE R\$\s+(\d+,\d{2})\s+((?:\S+\s+){0,2}\S+)'
-padrao_latampass = r"6320 - (.*?) valor"
-texto_restante = re.search(padrao_bradesco, data).group(2) if 'BRADESCO' in data else re.search(padrao_latampass, data).group(1)
+# padrao_bradesco = r'VALOR DE R\$\s+(\d+,\d{2})\s+((?:\S+\s+){0,2}\S+)'
+padrao_bradesco = r'VALOR DE R\$\s\d+\,\d{2}\s(.*?)(?=\s{3,})'
+padrao_latampass = r' - (.*?) valor'
+texto_restante = re.search(padrao_bradesco, data).group(1) if 'BRADESCO' in data else re.search(padrao_latampass, data).group(1)
 print(texto_restante)
 
 
 result_list.append([date, texto_restante, valor, ])
+print(result_list)

@@ -7,8 +7,11 @@ from PyPDF2 import PdfReader
 
 import itau_pdf
 
-pdf_brd = PdfReader(itau_pdf.pdf_file)
-page = pdf_brd.pages[0]
+pdf_brd = ''
+
+if itau_pdf.pdf_file:
+    pdf_brd = PdfReader(itau_pdf.pdf_file)
+    page = pdf_brd.pages[0]
 
 data = ''
 

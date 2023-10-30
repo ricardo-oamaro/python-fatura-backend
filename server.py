@@ -1,4 +1,6 @@
+import os
 import subprocess
+from os.path import exists
 
 from flask import Flask, render_template, request, redirect
 from twilio import twiml
@@ -32,12 +34,22 @@ def processar_pdf():
 def salvar_pdf():
     global sms
     global owner_sheet
-    sms = True
+    sms = False
     texto = request.form['texto']
     owner_sheet = request.form['opcao']
-    with open('sms.txt', 'w') as file:
-        file.write(texto)
-    subprocess.run(['python3', 'sms.py', str(sms), str(owner_sheet)])
+    file = request.files['pdf_file']
+    print(file)
+    if texto:
+        sms = True
+        if exists('arquivo.pdf'):
+            os.remove('arquivo.pdf')
+        with open('sms.txt', 'w') as file:
+            file.write(texto)
+        subprocess.run(['python3', 'sms.py', str(sms), str(owner_sheet)])
+    else:
+        sms = False
+        file.save('arquivo.pdf')  # Salva o arquivo enviado
+        subprocess.run(['python3', 'itau_pdf.py', str(sms), str(owner_sheet)])
     return 'Conteúdo salvo em arquivo.pdf com sucesso!<br><br><button><a href="/" style="text-decoration: none; color: ' \
            '333">Voltar para a Página Inicial</a></button>'
 
