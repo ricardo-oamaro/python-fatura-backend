@@ -37,6 +37,7 @@ def salvar_pdf():
     sms = False
     texto = request.form['texto']
     owner_sheet = request.form['opcao']
+    card_sheet = request.form['cartao']
     file = request.files['pdf_file']
     print(file)
     if texto:
@@ -45,7 +46,7 @@ def salvar_pdf():
             os.remove('arquivo.pdf')
         with open('sms.txt', 'w') as file:
             file.write(texto)
-        subprocess.run(['python3', 'sms.py', str(sms), str(owner_sheet)])
+        subprocess.run(['python3', 'sms.py', str(sms), str(owner_sheet), str(card_sheet)])
     else:
         sms = False
         file.save('arquivo.pdf')  # Salva o arquivo enviado

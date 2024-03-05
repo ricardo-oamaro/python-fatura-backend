@@ -3,7 +3,7 @@ import sys
 import gspread
 
 from bradesco_pdf import handled_list
-from sms import result_list, sms_receiver, owner_sheet
+from sms import result_list, sms_receiver, owner_sheet, card_sheet
 import itau_pdf
 
 sh_updated = False
@@ -13,7 +13,10 @@ spreadsheet = ''
 sheet = ''
 
 if owner_sheet == 'Ricardo' or itau_pdf.owner_sheet == 'Ricardo':
-    spreadsheet = gc.open("bradesco")
+    if card_sheet:
+        spreadsheet = gc.open("bradesco")
+    else:
+        spreadsheet = gc.open("caixa")
     sheet = spreadsheet.worksheet('meses')
 else:
     spreadsheet = gc.open("itau")
