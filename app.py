@@ -13,10 +13,10 @@ spreadsheet = ''
 sheet = ''
 
 if owner_sheet == 'Ricardo' or itau_pdf.owner_sheet == 'Ricardo':
-    if card_sheet:
-        spreadsheet = gc.open("bradesco")
-    else:
+    if card_sheet == 'Caixa':
         spreadsheet = gc.open("caixa")
+    else:
+        spreadsheet = gc.open("bradesco")
     sheet = spreadsheet.worksheet('meses')
 else:
     spreadsheet = gc.open("itau")
