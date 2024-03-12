@@ -45,7 +45,10 @@ def salvar_pdf():
         if exists('arquivo.pdf'):
             os.remove('arquivo.pdf')
         with open('sms.txt', 'w') as file:
-            file.write(texto)
+            for linha in texto.split('\n'):
+                linha = linha.strip()
+                if linha:
+                    file.write(linha + '\n')
         subprocess.run(['python3', 'sms.py', str(sms), str(owner_sheet), str(card_sheet)])
     else:
         sms = False
