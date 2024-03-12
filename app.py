@@ -65,9 +65,11 @@ def compare_lists(sheet_list, invoice_list):
 
 if sms_receiver == 'True':
     linhas = result_list
-    month_sheet.update_cell(next_line, 1, linhas[0][0])
-    month_sheet.update_cell(next_line, 2, linhas[0][1])
-    month_sheet.update_cell(next_line, 3, linhas[0][2])
+    print('linhas em app', linhas)
+    for indice, linha in enumerate(linhas, start=next_line):
+        month_sheet.update_cell(indice, 1, linha[0])
+        month_sheet.update_cell(indice, 2, linha[1])
+        month_sheet.update_cell(indice, 3, linha[2])
 elif itau_pdf.fatura_itau:
     print('entrei no if do itau')
     linhas = itau_pdf.result_list2
