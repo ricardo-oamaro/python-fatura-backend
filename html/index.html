@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+</head>
+<body>
+<form action="/salvar_pdf" method="post" enctype="multipart/form-data">
+    <label for="opcao">Selecione uma opção:</label>
+    <select name="opcao" id="opcao">
+        <option value="Ricardo">Ricardo</option>
+        <option value="Jecilene">Jecilene</option>
+    </select>
+    <br><br>
+
+    <label for="cartao">Selecione o cartão:</label>
+    <select name="cartao" id="cartao">
+        <option value="Bradesco">Bradesco</option>
+        <option value="Caixa">Caixa</option>
+    </select>
+    <br><br>
+
+    <label for="texto">Texto:</label>
+    <textarea name="texto" id="texto" rows="4" cols="50"></textarea>
+    <br><br>
+
+    <label for="pdf_file">Upload de arquivo PDF:</label>
+    <input type="file" name="pdf_file" id="pdf_file" accept=".pdf">
+    <br><br>
+
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>
