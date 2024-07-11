@@ -8,7 +8,7 @@ from twilio import twiml
 sms = False
 owner_sheet = ''
 
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__, template_folder='html')
 
 @app.route('/')
 def index():
